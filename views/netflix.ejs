@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Todo App</title>
+  <link rel="stylesheet" href="/static/stylesheet/style.css" type="text/css" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap"
+    rel="stylesheet"
+  />
+  <link rel = "stylesheet" href  = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+    crossorigin="anonymous"
+  />
+
+</head>
+<!-- <body> -->
+  <div class="todo-container">
+    <a href="/resume"> <h2>GO to my template</h2></a>
+
+    <input type="color" id="colorID" oninput="changeColor()">
+
+    <div class="todo">
+      <form action="/" method="POST" class="todo-header">
+        <input class="todo_input" type="text" name="content" />
+        <button type="submit">
+          <span class="fas fa-plus"></span>
+        </button>
+      </form>
+ 
+      <ul class="todo-list">
+        <% todoTasks.forEach(details => { %>
+        <li  class="todo-list-item">
+          <!-- <P><%= details.content %></P> -->
+          <div class="todo-list-item-name"><%= details.content %></div>
+          <a href="/edit/<%= details._id %>" class="edit">
+            <span class="fas fa-edit"></span>
+          </a>
+          <a href="/remove/<%= details._id %>" class="remove">
+            <span class="fas fa-times"></span>
+          </a>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+    </div>
+    <div>
+
+
+
+<form action="/" method="POST" class="todo-header">
+  <input class="todo_input" type="text" name="content" />
+  <input class="todo_input" type="text" name="cards" />
+  <input class="todo_input" type="text" name="footer" />
+  <input class="todo_input" type="text" name="button" />
+  <button type="submit">
+    <span class="fas fa-plus"></span>
+  </button>
+</form>
+      <div>
+        <ul class="todo-list">
+          <% todoTasks.forEach(details => { %>
+          <li  class="todo-list-item">
+            <!-- <P><%= details.content %></P> -->
+            <div class="todo-list-item-name"><%= details.content %></div>
+            <div class="todo-list-item-name"><%= details.cards %></div>
+            <div class="todo-list-item-name"><%= details.footer %></div>
+            <div class="todo-list-item-name"><%= details.button %></div>
+          </li>
+            <a href="/edit/<%= details._id %>" class="edit">
+              <span class="fas fa-edit"></span>
+            </a>
+            <a href="/remove/<%= details._id %>" class="remove">
+              <span class="fas fa-times"></span>
+            </a>
+       
+          <% }) %>
+        </ul>
+ 
+      </div>
+  
+    </div>
+  </div>
+  <script>
+    function changeColor() { 
+    var userColor = document.getElementById('colorID').value;
+    localStorage.setItem('storedValue', document.body.style.backgroundColor = userColor);
+  }
+  
+  // if there is a value stored, update color picker and background color
+  if(localStorage.storedValue) {
+    document.getElementById('colorID').value = localStorage.storedValue;
+    document.body.style.backgroundColor      = localStorage.storedValue;
+  }
+  </script>
+  <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>    
+  <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+</body>

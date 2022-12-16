@@ -1,0 +1,109 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/static/stylesheet/resume.css">
+    <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+    crossorigin="anonymous"
+  />
+  </head>
+  <body class="van-body">
+   <section class="van-main-section">
+    <header class="van-header">
+        <nav class="van-nav-bar">
+            <div class="van-left">
+            <a class="van-nav-link" id="van-logo" href="">Dribbble</a>
+            <a class="van-nav-link" href="">Esibe vanessa</a>
+            </div>
+
+            <div class="van-right">
+            <a class="van-nav-link" href="">Dribbble</a>
+            <a class="van-nav-link" href="">Linkedin</a>
+            <a class="van-nav-link" href="">About</a>
+            <a class="van-nav-link" href="">Contact</a>
+            <!-- <a class="fas fa-edit template" href="/templateEdit">Edit Template </a> -->
+          
+           
+          </div> 
+        </nav>
+      </header>
+  
+      <main>
+        <section class="van-section van-one">
+          <div class="van-image-div">
+            <!-- <img class="van-image" src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/048/187/original/WhatsApp_Image_2022-10-10_at_20.23.40.jpeg?1665555349" alt="vanessa" /> -->
+            <div class="todo-container">
+                <a href="/resume"> <h2>GO to my template</h2></a>
+               
+                <div class="todo">
+                  <form action="/nav" method="POST" class="todo-header">
+                    <input class="todo_input" type="text" name="nav" />
+                    <button type="submit">
+                      <span class="fas fa-plus"></span>
+                    </button>
+                  </form>
+             
+                  <ul class="todo-list">
+                    <% todoTasks.forEach(details => { %>
+                    <li class="todo-list-item">
+                      <div class="todo-list-item-name"><%= details.navbar %></div>
+                      <a href="/update/nav/<%= details._id %>" class="edit">
+                        <span class="fas fa-edit"></span>
+                      </a>
+                      <a href="/remove/<%= details._id %>" class="remove">
+                        <span class="fas fa-times"></span>
+                      </a>
+                    </li>
+                    <% }) %>
+                  </ul>
+                </div>
+              </div>
+          </div>
+          <div class="van-text-div1">
+            <a href="" class="flex edit">
+                <p>Hi there! </p>
+                <span class="fas fa-edit"></span>
+            </a>
+            
+            <p class="p">
+               <a href="">
+                I’m Esibe (she/her). I am passionate about user friendly designs, user interface and responsive design. I seek opportunities that combine the use of creative designs and strategic thinking in the realm of technologies. 
+
+                As a diversity and inclusion expert, I design websites with inclusion in mind. I mainly use JavaScript and React to perform the transformation magic.
+                
+                As a mentor, am passionate about sharing the knowledge I’ve learned to those who come after me.
+                <span class="fas fa-edit"></span>
+               </a>
+            </p>
+          </div>
+        </section>
+        <section class="van-section van-two">
+          <div class="van-text-div1">
+              <h2>My career so far</h2>
+              <p> Resolving client queries and complaints. Performing administrative and clerical duties, such as data entry and filing, when necessary.
+                Collaborating with other banking professionals to ensure high-quality client service.
+                 </p>
+          </div>
+          <div class="van-p-div">
+            
+            <button class="van-button">PHP</button>
+            <button class="van-button">Laravel</button>
+            <button class="van-button">Nodejs</button>
+            <button class="van-button">CSS</button>
+            <button class="van-button">Javascript</button>
+            <button class="van-button">Thinking</button>
+            <button id="van-long" class="van-button">Information and communication</button>
+            <button class="van-button">MongoDB</button>
+            <button class="van-button">communication</button>
+            <button class="van-button">CSS</button>
+            <button class="van-button">HTML</button>
+            <button class="van-button">French</button>
+            <button class="van-button">Boostrap</button>
+          </div>
+        </section>
+      </main>
+    </body>
+   </section>
+</html>
