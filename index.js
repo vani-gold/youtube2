@@ -90,113 +90,112 @@ app.route("/youtube/remove/:id").get((req, res) => {
 });
 
 
-
 //------------/////////////
 //--YOUTUBE CRUD HEADER TITLE---//
 //------------//////////////
 
 // YOU TUBE GET headertitle
-// app.get("/youtube/title", (req, res) => {
-//   YouTubeHeaderOne.find({}, (err, headerTitle) => {
-//     res.render("youtube.ejs", { youTubeHeaderOne: headerTitle });
-//   });
-// });
-// // YOU TUBE POST header
-// app.post("/youtube/title", async (req, res) => {
-//   const youTube = new YouTubeHeaderOne({ homeTitle: req.body.homeTitle });
-//   try {
-//     await youTube.save();
-//     res.redirect("/youtube");
-//   } catch (err) {
-//     res.redirect("/youtube");
-//   }
-// });
-// // YOU TUBE UPDATE header
-// app
-//   .route("/youtube/title/edit/:id")
-//   .get((req, res) => {
-//     const id = req.params.id;
-//     YouTubeHeaderOne.find({}, (err, headerTitle) => {
-//       res.render("youtubeEdit.ejs", { youTubeHeaderOne: headerTitle, idData: id });
-//     });
-//   })
-//   .post((req, res) => {
-//     const id = req.params.id;
-//     YouTubeHeaderOne.findByIdAndUpdate(
-//       id,{ homeTitle: req.body.homeTitle },
-//       (err) => {
-//         if (err) return res.status(500).send(err);
-//         res.redirect("/youtube");
-//       }
-//     );
-//   });
-// //DELETE header
-// app.route("/youtube/title/remove/:id").get((req, res) => {
-//   const id = req.params.id;
-//   YouTubeHeaderOne.findByIdAndRemove(id, (err) => {
-//     if (err) return res.send(500, err);
-//     res.redirect("/youtube");
-//   });
-// });
+app.get("/youtube/title", (req, res) => {
+  YouTubeHeaderOne.find({}, (err, headerTitle) => {
+    res.render("youtube.ejs", { youTubeHeaderOne: headerTitle });
+  });
+});
+// YOU TUBE POST header
+app.post("/youtube/title", async (req, res) => {
+  const youTube = new YouTubeHeaderOne({ homeTitle: req.body.homeTitle });
+  try {
+    await youTube.save();
+    res.redirect("/youtube");
+  } catch (err) {
+    res.redirect("/youtube");
+  }
+});
+// YOU TUBE UPDATE header
+app
+  .route("/youtube/title/edit/:id")
+  .get((req, res) => {
+    const id = req.params.id;
+    YouTubeHeaderOne.find({}, (err, headerTitle) => {
+      res.render("youtubeEdit.ejs", { youTubeHeaderOne: headerTitle, idData: id });
+    });
+  })
+  .post((req, res) => {
+    const id = req.params.id;
+    YouTubeHeaderOne.findByIdAndUpdate(
+      id,{ homeTitle: req.body.homeTitle },
+      (err) => {
+        if (err) return res.status(500).send(err);
+        res.redirect("/youtube");
+      }
+    );
+  });
+//DELETE header
+app.route("/youtube/title/remove/:id").get((req, res) => {
+  const id = req.params.id;
+  YouTubeHeaderOne.findByIdAndRemove(id, (err) => {
+    if (err) return res.send(500, err);
+    res.redirect("/youtube");
+  });
+});
 
 
-// //------------//
-// //--LANDING ---//
-// //------------//
+//------------//
+//--LANDING ---//
+//------------//
 
-// // Get method
-// app.get("/landing", (req, res) => {
-//   LandingModel.find({}, (err, data) => {
-//     res.render("landing.ejs", { LandingModel: data });
-//   });
-// });
+// Get method
+app.get("/landing", (req, res) => {
+  LandingModel.find({}, (err, data) => {
+    res.render("landing.ejs", { LandingModel: data });
+  });
+});
 
-// // POST METHOD
-// app.post("/land", async (req, res) => {
-//   const landing = new LandingModel({
-//     ...req.body,
-//   });
+// POST METHOD
+app.post("/land", async (req, res) => {
+  const landing = new LandingModel({
+    ...req.body,
+  });
 
-//   try {
-//     await landing.save();
-//     res.redirect("/landing");
-//   } catch (err) {
-//     res.redirect("/landing");
-//   }
-// });
+  try {
+    await landing.save();
+    res.redirect("/landing");
+  } catch (err) {
+    res.redirect("/landing");
+  }
+});
 
-// // Update or edit route
+// Update or edit route
 
-// // ///////////////
-// app
-//   .route("/landing/edit/:id")
-//   .get((req, res) => {
-//     const id = req.params.id;
-//     LandingModel.find({}, (err, data) => {
-//       res.render("landingEdit.ejs", { landingModel: data, idData: id });
-//     });
-//   })
-//   .post((req, res) => {
-//     const id = req.params.id;
-//     LandingModel.findByIdAndUpdate(
-//       id,
-//       {
-//         ...req.body,
-//       },
-//       (err) => {
-//         if (err) return res.status(500).send(err);
-//         res.redirect("/landing");
-//       });
-//   });
+// ///////////////
+app
+  .route("/landing/edit/:id")
+  .get((req, res) => {
+    const id = req.params.id;
+    LandingModel.find({}, (err, data) => {
+      res.render("landingEdit.ejs", { landingModel: data, idData: id });
+    });
+  })
+  .post((req, res) => {
+    const id = req.params.id;
+    LandingModel.findByIdAndUpdate(
+      id,
+      {
+        ...req.body,
+      },
+      (err) => {
+        if (err) return res.status(500).send(err);
+        res.redirect("/landing");
+      });
+  });
 
-// // DELETE
-// app.route("/landing/remove/:id").get((req, res) => {
-//   const id = req.params.id;
-//   LandingModel.findByIdAndRemove(id, (err) => {
-//     if (err) return res.send(500, err);
-//     res.redirect("/landing");
-//   });
-// });
+// DELETE
+app.route("/landing/remove/:id").get((req, res) => {
+  const id = req.params.id;
+  LandingModel.findByIdAndRemove(id, (err) => {
+    if (err) return res.send(500, err);
+    res.redirect("/landing");
+  });
+});
 
 
 ///////////////////////////templates//////////////////////////////
