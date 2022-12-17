@@ -2,9 +2,7 @@
   <head>
     <meta name="description" content="Hello this is my first web page!." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <link rel="stylesheet" href="/static/stylesheet/netflix.css">
-
-    <link rel="stylesheet" href="netflix.css" />
+     <link rel="stylesheet" href="/static/stylesheet/youtube.css">
     <link
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -49,19 +47,35 @@
             class="hero__bg__image"
           />
         </div>
+        <form action="" method="POST" class="todo-header">
+          <input type="text" name="homeTitle" />
+          <button type="submit"><span class="fas fa-plus"></span></button>
+        </form>
         <div class="hero__bg__overlay"></div>
 
         <div class="hero__card">
+          <% youTube.forEach(function(section) { %> <% if (section._id == idData) { %>
           <h1 class="hero__title">
-           
-            Unlimited Movies TV,<br />
-            Shows and More.
+            <form action="/youtube/edit/<%= section._id %>" method="POST">
+              <input type="text" value="<%= section.homeTitle %>" name="homeTitle" />
+              <button type="submit">Confirm</button>
+              <a href="/youtube" class="cancel">Cancel</a>
+            </form>
+            <!-- Unlimited Movies TV,<br />
+            Shows and More. -->
           </h1>
-          <p class="hero__subtitle">Watch anywhere and cancel anytime.</p>
-          <p class="hero__description">
-            Ready to watch? Enter your email to create or restart your
-            membership .
-          </p>
+            <% } %> <% }) %>
+            <p class="hero__subtitle">some text </p>
+            <p class="hero__description">some text 
+           
+            </p>
+         
+          <a href="" class="edit">
+            <span class="fas fa-edit"></span>
+          </a>
+          <a href="" class="remove">
+            <span class="fas fa-times"></span>
+          </a>
 
           <div class="email__form__container">
             <div class="form__container">
@@ -79,41 +93,36 @@
       <section  class="features__container">
    
         </div>
+<!-- /////////////////////////////////////////// -->
+      
 
-       
-     
         <div id="sec2"class="feature">
           <div class="feature__details">
-    
-            <% youTube.forEach(function (section) { %> 
             <h3 class="feature__title">
-              <% if (section._id == idData) { %>
-                <form action="/youtube/edit/<%= section._id %>" method="POST">
-              <input type="text" value="<%= section.sectionTitle %>" name="sectionTitle">
+             
             </h3>
             <h5 class="feature__sub__title">
-              <input type="text" value="<%= section.sectionSubTitle %>" name="sectionSubTitle">
+            
             </h5>
-            <button type="submit">Confirm</button>
-            <a href="/youtube" class="cancel">Cancel</a>
+  
           </div>
           <div class="feature__image__container">
+      
             <img
               src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/058/188/original/netflix6.jpg?1670913883"
               alt="Feature image"
               class="feature__image"
             />
           </div>
+         
         </div>
-        <% } else { %>
-            <!-- <div class="todo-list-item-name"></div> -->
-            <a href="/youtube/edit/<%= section._id %>" class="edit">
-              <span class="fas fa-edit"></span>
-            </a>
-            <a href="youtube/remove/<%= section._id %>" class="remove">
-              <span class="fas fa-times"></span>
-            </a>
-            <% } %> <% }) %>
+        <a href="" class="edit">
+          <span class="fas fa-edit"></span>
+        </a>
+        <a href="" class="remove">
+          <span class="fas fa-times"></span>
+        </a>
+  
         <!-- Feature 3 -->
     
         </div>
@@ -140,18 +149,23 @@
         <section  class="features__container">
         <h1 class="FAQ__heading">Frequently Asked Questions</h1>
         <div class="FAQ__list">
-          <% youTube.forEach(function (section) { %>
+         
           
                    <div class="FAQ__accordian">
             <details id="faq" >
-                <summary class="FAQ__title"> <%= section.summary %> <i class="fal fa-plus"></i></summary>
-                <p class="summary_p"><%= section.detail %> </p>
-               
+                <summary class="FAQ__title">sometext<i class="fal fa-plus"></i></summary>
+                <p class="summary_p">text</p>
+             
             </details>
-         
-        </div>
-        <% }) %>   
+            <a href="" class="edit">
+              <span class="fas fa-edit"></span>
+            </a>
+            <a href="" class="remove">
+              <span class="fas fa-times"></span>
+            </a>
+        </div>  
 
+        
 
           </div>
         </div>
@@ -177,11 +191,11 @@
               
         <div>
             <span class="add_section"> change back</span>
-            <input type="color" id="colorID"oninput="changeColor()">
+            <input type="color" id="colorID" oninput="changeColor()">
             <!-- <div class="wrapper">
             
           </div> -->
-          <span>  <a href="#demo-modal">Open Demo Modal</a></span>
+          <span>  <a href="#demo-modal">Edit page here</a></span>
         </div>
     </div>
 
@@ -192,7 +206,7 @@
         <h1 class="align_center">Fill this form to add content</h1>
 
         <div class="modal-body">
-          <form action="/youtube" method="POST" class="todo-header">
+          <form action="/youtube" method="POST" class="todo-header" >
             <!-- <label for="">A Landing page: </label>
               <input class="todo_input" placeholder="Main home Title" type="text" name="homeTitle"/>
               <input class="todo_input" placeholder="Main home sub Title" type="text" name="homeSubTitle1"/>
@@ -201,27 +215,25 @@
             <input class="todo_input"  placeholder="Section Title" type="text" name="sectionTitle"/>
             <input class="todo_input" placeholder="Section Sub Title" type="text" name="sectionSubTitle"/>
             <p class="align_center">Add Frequently Qsked question</p>
-            <input class="todo_input" placeholder="FAQ Summary" type="text" name=" summary"/>
+            <input class="todo_input" placeholder="FAQ Summary" type="text" name="summary"/>
             <input class="todo_input" placeholder="FAQ Details" type="text" name="detail"/>
             <!-- <input class="todo_input" placeholder="Buttom Button" type="text" name="button"/> -->
             <p class="align_center"for="">footer</p>
-            <input class="todo_input" placeholder="Footer one" type="text" name="  footer1"/>
-            <input class="todo_input" placeholder="Footer two" type="text" name="  footer2"/>
-            <input class="todo_input" placeholder="Footer three" type="text" name="  footer3"/>
-            <input class="todo_input" placeholder="Footer four" type="text" name="  footer4"/>
-            <button class="btn_modal" type="submit">
-             Submit
-            </button>
+            <input class="todo_input" placeholder="Footer one" type="text" name="footer1"/>
+            <input class="todo_input" placeholder="Footer two" type="text" name="footer2"/>
+            <input class="todo_input" placeholder="Footer three" type="text" name="footer3"/>
+            <input class="todo_input" placeholder="Footer four" type="text" name="footer4"/>
+            <button class="btn_modal" type="submit">Submit</button>
+            <button class="btn_modal" type="">Cancel</button>
           </form>
         </div>
-        <a href="#" class="modal__close">&times;</a>
     </div>
 </div>
     
 
     </main>
             
-    <footer id="sec7">
+    <footer>
     
 
       <div class="footer_div_container">

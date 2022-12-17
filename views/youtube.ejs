@@ -2,9 +2,7 @@
   <head>
     <meta name="description" content="Hello this is my first web page!." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <link rel="stylesheet" href="/static/stylesheet/netflix.css">
-
-    <link rel="stylesheet" href="netflix.css" />
+     <link rel="stylesheet" href="/static/stylesheet/youtube.css">
     <link
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -52,11 +50,19 @@
         <div class="hero__bg__overlay"></div>
 
         <div class="hero__card">
+          <% youTube.forEach(function (section) { %>
           <h1 class="hero__title">
-           
-            Unlimited Movies TV,<br />
-            Shows and More.
+            <%= section.homeTitle %>
+            <!-- Unlimited Movies TV,<br />
+            Shows and More. -->
           </h1>
+          <a href="/youtube/edit/<%= section._id %>" class="edit">
+            <span class="fas fa-edit"></span>
+          </a>
+          <a href="youtube/remove/<%= section._id %>" class="remove">
+            <span class="fas fa-times"></span>
+          </a>
+          <% }) %>
           <p class="hero__subtitle">Watch anywhere and cancel anytime.</p>
           <p class="hero__description">
             Ready to watch? Enter your email to create or restart your
@@ -149,10 +155,8 @@
             <a href="youtube/remove/<%= section._id %>" class="remove">
               <span class="fas fa-times"></span>
             </a>
-        </div>
-    
-        <% }) %>   
-
+        </div>  
+        <% }) %> 
         
 
           </div>
@@ -179,7 +183,7 @@
               
         <div>
             <span class="add_section"> change back</span>
-            <input type="color" id="colorID"oninput="changeColor()">
+            <input type="color" id="colorID" oninput="changeColor()">
             <!-- <div class="wrapper">
             
           </div> -->
@@ -211,21 +215,10 @@
             <input class="todo_input" placeholder="Footer two" type="text" name="footer2"/>
             <input class="todo_input" placeholder="Footer three" type="text" name="footer3"/>
             <input class="todo_input" placeholder="Footer four" type="text" name="footer4"/>
-            <button class="btn_modal" type="submit">
-             Submit
-            </button>
-            <button class="btn_modal" type="">
-              Cancel
-             </button>
+            <button class="btn_modal" type="submit">Submit</button>
+            <button class="btn_modal" type="">Cancel</button>
           </form>
         </div>
-    
-        <!-- <div class="modal__footer">
-          Made with <i class="fa fa-heart"></i>, by <a href="https://twitter.com/denicmarko" target="_blank">@denicmarko</a>
-        <a href="/youtube">cancel</a>
-      </div>
-
-      <a href="/youtube" class="modal__close">x</a> -->
     </div>
 </div>
     

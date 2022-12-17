@@ -1,13 +1,15 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
-const fs = require('fs');
+const fs = require("fs");
 const bodyParser = require("body-parser");
 const { GridFsStorage } = require("multer-gridfs-storage");
-const multer  = require('multer');
+const multer = require("multer");
 const image = require("./models/image");
 const YouTube = require("./models/YouTube");
+const YouTubeHeaderOne = require("./models/YouTubeHeaderOne");
 const NavBar = require("./models/NavBar");
-const Quest = require("./models/Question");
+const Quest = require("./models/YouTubeQuestion");
+const LandingModel = require("./models/LandingModel");
 const mongoose = require("mongoose");
 
 const app = express();
@@ -15,10 +17,9 @@ const app = express();
 app.use(express.urlencoded({ extended: true })); //Urlencoded will allow us to extract the data from the form by adding her to the body property of the request.
 // app.use(bodyParser. text({type: '/'}));
 const dotenv = require("dotenv");
-const Question = require("./models/Question");
+const Question = require("./models/YouTubeQuestion");
 dotenv.config();
-app.use(bodyParser.urlencoded(
-  { extended:true }))
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/static", express.static("public"));
 app.use(fileUpload());
 //connection to db
@@ -34,22 +35,22 @@ mongoose.connect(
     app.listen(8080, () => console.log("Server Up and running 8080"));
   }
 );
-
 app.set("view engine", "ejs");
 
-// GET METHOD
+//------------/////////////
+//--YOUTUBE CRUDE---//
+//------------//////////////
+// YOU TUBE GET METHOD
 app.get("/youtube", (req, res) => {
   YouTube.find({}, (err, tasks) => {
     res.render("youtube.ejs", { youTube: tasks });
   });
 });
-
-// POST METHOD
+// YOU TUBE POST METHOD
 app.post("/youtube", async (req, res) => {
   const youTube = new YouTube({
     ...req.body,
   });
-
   try {
     await youTube.save();
     res.redirect("/youtube");
@@ -57,18 +58,7 @@ app.post("/youtube", async (req, res) => {
     res.redirect("/youtube");
   }
 });
-
-
-app.post("/upload", (req, res) => {
-  // Get the file that was set to our field named "image"
-  const { image } = req.files;
-  // If no image submitted, exit
-  if (!image) return res.sendStatus(400);
-  // Move the uploaded image to our upload folder
-  const img = image.mv(__dirname + "/youtube/" + image.name);
-  res.sendStatus(200);
-});
-// UPDATE
+// YOU TUBE UPDATE
 app
   .route("/youtube/edit/:id")
   .get((req, res) => {
@@ -79,14 +69,17 @@ app
   })
   .post((req, res) => {
     const id = req.params.id;
-    YouTube.findByIdAndUpdate(id, { 
-      ...req.body
-    }, (err) => {
-      if (err) return res.status(500).send(err);
-      res.redirect("/youtube");
-    });
+    YouTube.findByIdAndUpdate(
+      id,
+      {
+        ...req.body,
+      },
+      (err) => {
+        if (err) return res.status(500).send(err);
+        res.redirect("/youtube");
+      }
+    );
   });
-
 //DELETE
 app.route("/youtube/remove/:id").get((req, res) => {
   const id = req.params.id;
@@ -95,6 +88,116 @@ app.route("/youtube/remove/:id").get((req, res) => {
     res.redirect("/youtube");
   });
 });
+
+
+
+//------------/////////////
+//--YOUTUBE CRUD HEADER TITLE---//
+//------------//////////////
+
+// YOU TUBE GET headertitle
+// app.get("/youtube/title", (req, res) => {
+//   YouTubeHeaderOne.find({}, (err, headerTitle) => {
+//     res.render("youtube.ejs", { youTubeHeaderOne: headerTitle });
+//   });
+// });
+// // YOU TUBE POST header
+// app.post("/youtube/title", async (req, res) => {
+//   const youTube = new YouTubeHeaderOne({ homeTitle: req.body.homeTitle });
+//   try {
+//     await youTube.save();
+//     res.redirect("/youtube");
+//   } catch (err) {
+//     res.redirect("/youtube");
+//   }
+// });
+// // YOU TUBE UPDATE header
+// app
+//   .route("/youtube/title/edit/:id")
+//   .get((req, res) => {
+//     const id = req.params.id;
+//     YouTubeHeaderOne.find({}, (err, headerTitle) => {
+//       res.render("youtubeEdit.ejs", { youTubeHeaderOne: headerTitle, idData: id });
+//     });
+//   })
+//   .post((req, res) => {
+//     const id = req.params.id;
+//     YouTubeHeaderOne.findByIdAndUpdate(
+//       id,{ homeTitle: req.body.homeTitle },
+//       (err) => {
+//         if (err) return res.status(500).send(err);
+//         res.redirect("/youtube");
+//       }
+//     );
+//   });
+// //DELETE header
+// app.route("/youtube/title/remove/:id").get((req, res) => {
+//   const id = req.params.id;
+//   YouTubeHeaderOne.findByIdAndRemove(id, (err) => {
+//     if (err) return res.send(500, err);
+//     res.redirect("/youtube");
+//   });
+// });
+
+
+// //------------//
+// //--LANDING ---//
+// //------------//
+
+// // Get method
+// app.get("/landing", (req, res) => {
+//   LandingModel.find({}, (err, data) => {
+//     res.render("landing.ejs", { LandingModel: data });
+//   });
+// });
+
+// // POST METHOD
+// app.post("/land", async (req, res) => {
+//   const landing = new LandingModel({
+//     ...req.body,
+//   });
+
+//   try {
+//     await landing.save();
+//     res.redirect("/landing");
+//   } catch (err) {
+//     res.redirect("/landing");
+//   }
+// });
+
+// // Update or edit route
+
+// // ///////////////
+// app
+//   .route("/landing/edit/:id")
+//   .get((req, res) => {
+//     const id = req.params.id;
+//     LandingModel.find({}, (err, data) => {
+//       res.render("landingEdit.ejs", { landingModel: data, idData: id });
+//     });
+//   })
+//   .post((req, res) => {
+//     const id = req.params.id;
+//     LandingModel.findByIdAndUpdate(
+//       id,
+//       {
+//         ...req.body,
+//       },
+//       (err) => {
+//         if (err) return res.status(500).send(err);
+//         res.redirect("/landing");
+//       });
+//   });
+
+// // DELETE
+// app.route("/landing/remove/:id").get((req, res) => {
+//   const id = req.params.id;
+//   LandingModel.findByIdAndRemove(id, (err) => {
+//     if (err) return res.send(500, err);
+//     res.redirect("/landing");
+//   });
+// });
+
 
 ///////////////////////////templates//////////////////////////////
 // GET ROUTE FOR RESUME
@@ -119,7 +222,7 @@ app.route("/youtube/remove/:id").get((req, res) => {
 //       throw err;
 //     } else {
 //       res.redirect("/resume");
-      
+
 //     }
 //   });
 // });
@@ -144,7 +247,7 @@ app.route("/youtube/remove/:id").get((req, res) => {
 //       throw err;
 //     } else {
 //       res.redirect("/");
-      
+
 //     }
 //   });
 // });
@@ -159,7 +262,6 @@ app.route("/youtube/remove/:id").get((req, res) => {
 //     cb(null, file.originalname + '-' + Date.now())
 //   }
 // })
-
 
 // //Routes
 // app.get("/image",(req,res)=>{
